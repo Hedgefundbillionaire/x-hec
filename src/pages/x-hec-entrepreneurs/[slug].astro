@@ -1,21 +1,20 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const pages = {
-  admission: ["Admission X-HEC Entrepreneurs 2026 | Dream School", "Critères, calendrier et stratégie d'admission X-HEC Entrepreneurs pour préparer un dossier solide.", "Admission X-HEC Entrepreneurs"],
-  entretien: ["Entretien X-HEC Entrepreneurs | Questions et Préparation", "Questions probables, structure de pitch et méthode pour réussir l'entretien X-HEC Entrepreneurs.", "Entretien X-HEC Entrepreneurs"],
-  candidature: ["Candidature X-HEC Entrepreneurs | CV, Lettre, Dossier", "Préparer CV, lettre de motivation, recommandations et preuves entrepreneuriales pour X-HEC Entrepreneurs.", "Candidature X-HEC Entrepreneurs"],
-  "cout-financement": ["Coût X-HEC Entrepreneurs | Frais, Bourses, Financement", "Comprendre les frais, bourses, prêts et options de financement du MSc X-HEC Entrepreneurs.", "Coût et financement X-HEC Entrepreneurs"],
-  debouches: ["Débouchés X-HEC Entrepreneurs | Startups et Carrières", "Débouchés X-HEC Entrepreneurs: startups, levées de fonds, innovation, venture capital et carrières.", "Débouchés X-HEC Entrepreneurs"],
-  avis: ["Avis X-HEC Entrepreneurs | Expérience Étudiante", "Retours d'expérience, vie de campus et avis étudiants sur le MSc X-HEC Entrepreneurs.", "Avis X-HEC Entrepreneurs"]
-};
-
 export function getStaticPaths() {
-  return Object.keys(pages).map((slug) => ({ params: { slug } }));
+  const pages = {
+    admission: ["Admission X-HEC Entrepreneurs 2026 | Dream School", "Critères, calendrier et stratégie d'admission X-HEC Entrepreneurs pour préparer un dossier solide.", "Admission X-HEC Entrepreneurs"],
+    entretien: ["Entretien X-HEC Entrepreneurs | Questions et Préparation", "Questions probables, structure de pitch et méthode pour réussir l'entretien X-HEC Entrepreneurs.", "Entretien X-HEC Entrepreneurs"],
+    candidature: ["Candidature X-HEC Entrepreneurs | CV, Lettre, Dossier", "Préparer CV, lettre de motivation, recommandations et preuves entrepreneuriales pour X-HEC Entrepreneurs.", "Candidature X-HEC Entrepreneurs"],
+    "cout-financement": ["Coût X-HEC Entrepreneurs | Frais, Bourses, Financement", "Comprendre les frais, bourses, prêts et options de financement du MSc X-HEC Entrepreneurs.", "Coût et financement X-HEC Entrepreneurs"],
+    debouches: ["Débouchés X-HEC Entrepreneurs | Startups et Carrières", "Débouchés X-HEC Entrepreneurs: startups, levées de fonds, innovation, venture capital et carrières.", "Débouchés X-HEC Entrepreneurs"],
+    avis: ["Avis X-HEC Entrepreneurs | Expérience Étudiante", "Retours d'expérience, vie de campus et avis étudiants sur le MSc X-HEC Entrepreneurs.", "Avis X-HEC Entrepreneurs"]
+  };
+  return Object.entries(pages).map(([slug, data]) => ({ params: { slug }, props: { data } }));
 }
 
-const slug = Astro.params.slug as keyof typeof pages;
-const [title, description, h1] = pages[slug];
+const slug = Astro.params.slug ?? "";
+const [title, description, h1] = Astro.props.data;
 ---
 
 <BaseLayout title={title} description={description} path={`/x-hec-entrepreneurs/${slug}`}>
@@ -23,9 +22,6 @@ const [title, description, h1] = pages[slug];
     <p class="text-sm font-bold uppercase tracking-[0.18em] text-gold">X-HEC Entrepreneurs</p>
     <h1 class="mt-4 font-serif text-5xl font-bold text-navy">{h1}</h1>
     <p class="mt-5 text-lg leading-8 text-ink/72">Page pilier prête pour le contenu détaillé. Elle sert de support SEO long-tail et renvoie vers le guide principal, le calculateur et la réservation.</p>
-    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-      <a class="bg-navy px-6 py-4 text-center text-sm font-bold text-white" href="/x-hec-entrepreneurs">Guide complet</a>
-      <a class="border border-navy/20 px-6 py-4 text-center text-sm font-bold text-navy" href="/calculateur-admission">Calculer mes chances</a>
-    </div>
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a class="bg-navy px-6 py-4 text-center text-sm font-bold text-white" href="/x-hec-entrepreneurs">Guide complet</a><a class="border border-navy/20 px-6 py-4 text-center text-sm font-bold text-navy" href="/calculateur-admission">Calculer mes chances</a></div>
   </main>
 </BaseLayout>
