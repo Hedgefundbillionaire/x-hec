@@ -1,0 +1,38 @@
+---
+import Logo from "./Logo.astro";
+import { programLinksFr, site } from "../site";
+---
+
+<footer class="border-t border-navy/10 bg-navy text-white">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <div>
+      <Logo class="h-11 w-11" textClass="text-white" />
+      <p class="mt-5 max-w-sm text-sm leading-7 text-white/72">{site.description}</p>
+      <p class="mt-5 max-w-sm text-xs leading-6 text-white/58">{site.disclaimerFr}</p>
+    </div>
+    <div>
+      <p class="font-semibold text-gold">Programmes</p>
+      <div class="mt-4 grid gap-3 text-sm text-white/72">
+        <a href="/x-hec-entrepreneurs">X-HEC Entrepreneurs</a>
+        <a href="/blog">Blog admissions</a>
+        <a href="/calculateur-admission">Calculateur admission</a>
+      </div>
+    </div>
+    <div>
+      <p class="font-semibold text-gold">X-HEC</p>
+      <div class="mt-4 grid gap-3 text-sm text-white/72">
+        {programLinksFr.map((item) => <a href={item.href}>{item.label}</a>)}
+      </div>
+    </div>
+    <div>
+      <p class="font-semibold text-gold">Légal</p>
+      <div class="mt-4 grid gap-3 text-sm text-white/72">
+        <a href="/a-propos">À propos</a>
+        <a href="/mentions-legales">Mentions légales</a>
+        <a href="/politique-confidentialite">Confidentialité</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-white/10 px-5 py-5 text-center text-xs text-white/55">© 2026 Dream School. Tous droits réservés.</div>
+</footer>
