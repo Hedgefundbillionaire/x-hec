@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "Politique de confidentialité | Dream School";
+const description = "Politique de confidentialité RGPD de Dream School: collecte email, Brevo, conservation, droits et cookies.";
+---
+<BaseLayout title={title} description={description} path="/politique-confidentialite" noSticky>
+  <main class="content mx-auto max-w-3xl px-5 py-16">
+    <h1 class="font-serif text-5xl font-bold text-navy">Politique de confidentialité</h1>
+    <p>Dream School collecte les données transmises volontairement via formulaires: prénom, email, niveau actuel et informations de candidature.</p>
+    <p>Les emails seront gérés via Brevo après configuration. Les données sont conservées pour la durée nécessaire au suivi commercial, puis supprimées sur demande.</p>
+    <p>Vous pouvez demander l'accès, la rectification ou la suppression de vos données à contact@dreamschool.com.</p>
+    <p>Le site privilégie Plausible Analytics, sans cookie de suivi personnel. La bannière actuelle informe sur les cookies essentiels.</p>
+  </main>
+</BaseLayout>
