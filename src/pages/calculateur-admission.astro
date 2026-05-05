@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Calculateur Admission X-HEC Entrepreneurs | Dream School";
+const description = "Estimez vos chances d'admission X-HEC Entrepreneurs et recevez trois axes de progression personnalisés.";
+---
+
+<BaseLayout title={title} description={description} path="/calculateur-admission" noSticky>
+  <main class="bg-mist">
+    <section class="mx-auto max-w-5xl px-5 py-16">
+      <p class="text-sm font-bold uppercase tracking-[0.18em] text-gold">Lead magnet</p>
+      <h1 class="mt-4 font-serif text-5xl font-bold leading-tight text-navy">Calculateur d'admission X-HEC Entrepreneurs</h1>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-ink/72">Un score indicatif pour identifier les points faibles du dossier. Le résultat n'est pas une décision d'admission et ne remplace pas l'évaluation officielle.</p>
+      <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_360px]">
+        <form id="admission-form" class="grid gap-5 border border-navy/10 bg-white p-6 shadow-soft" action="/merci" method="POST">
+          <input type="hidden" name="source" value="calculator" />
+          <label class="grid gap-2 text-sm font-semibold text-navy">Prénom<input class="border border-navy/15 px-3 py-3 font-normal" name="firstName" required /></label>
+          <label class="grid gap-2 text-sm font-semibold text-navy">Email<input class="border border-navy/15 px-3 py-3 font-normal" name="email" type="email" required /></label>
+          <label class="grid gap-2 text-sm font-semibold text-navy">École actuelle<select class="border border-navy/15 px-3 py-3 font-normal" name="school"><option>École d'ingénieur française</option><option>École de commerce française</option><option>Université internationale</option><option>Université française</option><option>Autre</option></select></label>
+          <label class="grid gap-2 text-sm font-semibold text-navy">Niveau d'études<select class="border border-navy/15 px-3 py-3 font-normal" name="level"><option>Bachelor / Licence</option><option>Master 1</option><option>Master 2</option><option>Jeune diplômé</option></select></label>
+          <label class="grid gap-2 text-sm font-semibold text-navy">GPA ou moyenne /20<input class="border border-navy/15 px-3 py-3 font-normal" name="gpa" type="number" min="0" max="20" step="0.1" value="14" /></label>
+          <label class="grid gap-2 text-sm font-semibold text-navy">Score GMAT, GRE ou TAGE MAGE<input class="border border-navy/15 px-3 py-3 font-normal" name="testScore" type="number" min="0" max="800" value="650" /></label>
+          <label class="grid gap-2 text-sm font-semibold text-navy">Expérience professionnelle, en mois<input class="border border-navy/15 px-3 py-3 font-normal" name="workMonths" type="number" min="0" max="120" value="6" /></label>
+          <fieldset class="grid gap-3"><legend class="text-sm font-semibold text-navy">Expérience entrepreneuriale</legend><label class="flex gap-2 text-sm"><input name="entrepreneurial" type="radio" value="yes" checked /> Oui</label><label class="flex gap-2 text-sm"><input name="entrepreneurial" type="radio" value="no" /> Non</label><textarea class="min-h-28 border border-navy/15 px-3 py-3 text-sm" name="entrepreneurialDetails" placeholder="Projet lancé, association, freelancing, intrapreneuriat, hackathon..."></textarea></fieldset>
+          <label class="grid gap-2 text-sm font-semibold text-navy">Langues parlées<input class="border border-navy/15 px-3 py-3 font-normal" name="languages" placeholder="Français, anglais, espagnol..." /></label>
+          <button class="bg-navy px-6 py-4 text-sm font-bold text-white hover:bg-navy/90" type="submit">Voir mon score</button>
+        </form>
+        <aside id="result" class="border border-navy/10 bg-white p-6 shadow-soft lg:sticky lg:top-28 lg:self-start">
+          <p class="text-sm font-bold uppercase tracking-[0.16em] text-gold">Résultat</p>
+          <p class="mt-4 font-serif text-5xl font-bold text-navy"><span id="score">--</span>%</p>
+          <p class="mt-3 text-sm leading-6 text-ink/70">Complétez le formulaire. Le score s'affichera avant la redirection vers la page merci.</p>
+          <ul id="weaknesses" class="mt-5 grid gap-3 text-sm leading-6 text-ink/75"></ul>
+          <a class="mt-6 block bg-gold px-5 py-3 text-center text-sm font-bold text-navy" href="/reservation">Réserver un appel gratuit</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <script>
+    const form = document.querySelector("#admission-form");
+    const scoreEl = document.querySelector("#score");
+    const weaknessesEl = document.querySelector("#weaknesses");
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const gpa = Number(data.get("gpa") || 0);
+      const testScore = Number(data.get("testScore") || 0);
+      const workMonths = Number(data.get("workMonths") || 0);
+      const entrepreneurial = data.get("entrepreneurial") === "yes";
+      let score = 24;
+      score += Math.min(24, Math.max(0, (gpa - 10) * 3.4));
+      score += Math.min(18, testScore / 45);
+      score += Math.min(12, workMonths * 1.2);
+      score += entrepreneurial ? 18 : 3;
+      score += String(data.get("languages") || "").toLowerCase().includes("anglais") ? 4 : 0;
+      const rounded = Math.max(8, Math.min(92, Math.round(score)));
+      const weaknesses = [];
+      if (gpa < 14.5) weaknesses.push("Renforcer l'explication de la trajectoire académique et des preuves d'excellence.");
+      if (testScore < 650) weaknesses.push("Clarifier la stratégie test ou compenser par des preuves quantitatives solides.");
+      if (!entrepreneurial) weaknesses.push("Créer une preuve entrepreneuriale concrète avant l'entretien.");
+      if (workMonths < 6) weaknesses.push("Mettre davantage en avant projets, stages ou responsabilités associatives.");
+      scoreEl.textContent = String(rounded);
+      weaknessesEl.innerHTML = weaknesses.slice(0, 3).map((item) => `<li>${item}</li>`).join("");
+      setTimeout(() => form.submit(), 1800);
+    });
+  </script>
+</BaseLayout>
