@@ -1,23 +1,22 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const pages = {
-  "about": ["About Dream School | Admissions Coaching", "Learn about Dream School, an independent admissions coaching service.", "About Dream School"],
-  "faq": ["Admissions FAQ | Dream School", "Frequently asked questions about Dream School and selective school admissions.", "Admissions FAQ"],
-  "contact": ["Contact Dream School | Admissions Coaching", "Contact Dream School for X-HEC Entrepreneurs and Grande École admissions coaching.", "Contact"],
-  "blog": ["Admissions Blog | Dream School", "Insights on X-HEC Entrepreneurs, HEC, ESSEC, ESCP, INSEAD and selective applications.", "Admissions Blog"],
-  "legal-notice": ["Legal Notice | Dream School", "Legal notice for Dream School.", "Legal Notice"],
-  "privacy-policy": ["Privacy Policy | Dream School", "Privacy policy for Dream School email collection, Brevo and analytics.", "Privacy Policy"],
-  "admissions-calculator": ["Admissions Calculator | Dream School", "Estimate your X-HEC Entrepreneurs admissions chances.", "Admissions Calculator"],
-  "thank-you": ["Thank You | Dream School", "Your Dream School request has been received.", "Thank you"],
-  "booking": ["Book a Free Call | Dream School", "Book a free 20-minute admissions diagnostic.", "Book a Free Call"]
-};
-
 export function getStaticPaths() {
+  const pages = {
+    "about": ["About Dream School | Admissions Coaching", "Learn about Dream School, an independent admissions coaching service.", "About Dream School"],
+    "faq": ["Admissions FAQ | Dream School", "Frequently asked questions about Dream School and selective school admissions.", "Admissions FAQ"],
+    "contact": ["Contact Dream School | Admissions Coaching", "Contact Dream School for X-HEC Entrepreneurs and Grande École admissions coaching.", "Contact"],
+    "blog": ["Admissions Blog | Dream School", "Insights on X-HEC Entrepreneurs, HEC, ESSEC, ESCP, INSEAD and selective applications.", "Admissions Blog"],
+    "legal-notice": ["Legal Notice | Dream School", "Legal notice for Dream School.", "Legal Notice"],
+    "privacy-policy": ["Privacy Policy | Dream School", "Privacy policy for Dream School email collection, Brevo and analytics.", "Privacy Policy"],
+    "admissions-calculator": ["Admissions Calculator | Dream School", "Estimate your X-HEC Entrepreneurs admissions chances.", "Admissions Calculator"],
+    "thank-you": ["Thank You | Dream School", "Your Dream School request has been received.", "Thank you"],
+    "booking": ["Book a Free Call | Dream School", "Book a free 20-minute admissions diagnostic.", "Book a Free Call"]
+  };
   return Object.entries(pages).map(([slug, data]) => ({ params: { slug }, props: { data } }));
 }
 
-const slug = Astro.params.slug as keyof typeof pages;
+const slug = Astro.params.slug ?? "";
 const [title, description, h1] = Astro.props.data;
 ---
 
