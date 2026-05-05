@@ -14,11 +14,11 @@ const pages = {
 };
 
 export function getStaticPaths() {
-  return Object.keys(pages).map((slug) => ({ params: { slug } }));
+  return Object.entries(pages).map(([slug, data]) => ({ params: { slug }, props: { data } }));
 }
 
 const slug = Astro.params.slug as keyof typeof pages;
-const [title, description, h1] = pages[slug];
+const [title, description, h1] = Astro.props.data;
 ---
 
 <BaseLayout title={title} description={description} path={`/en/${slug}`} lang="en" noSticky={slug === "legal-notice" || slug === "privacy-policy"}>
