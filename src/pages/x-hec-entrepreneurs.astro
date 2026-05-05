@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import InlineCTA from "../components/InlineCTA.astro";
+import { programLinksFr, site } from "../site";
+
+const title = "X-HEC Entrepreneurs : Guide Complet d'Admission 2026";
+const description = "Guide français X-HEC Entrepreneurs 2026: admission, dossier, entretien, coût, financement, campus, débouchés et FAQ.";
+const faq = [
+  ["X-HEC Entrepreneurs est-il un double diplôme ?", "Le programme est porté conjointement par HEC Paris et l'École Polytechnique. Les modalités exactes doivent être vérifiées sur la page officielle HEC."],
+  ["Quel profil a le plus de chances ?", "Un profil combinant excellence académique, maturité entrepreneuriale, preuves d'exécution et clarté de projet est généralement plus convaincant."],
+  ["Faut-il avoir déjà créé une entreprise ?", "Ce n'est pas toujours indispensable, mais une expérience entrepreneuriale concrète aide à rendre le dossier crédible."],
+  ["Comment préparer l'entretien ?", "Il faut préparer un récit court, des exemples chiffrés, une lecture du marché visé et des réponses aux faiblesses évidentes du dossier."],
+  ["Dream School est-il affilié à HEC ou Polytechnique ?", "Non. Dream School est un service de coaching indépendant."]
+];
+const toc = [["Programme","programme"],["Profil des admis","profil-des-admis"],["Critères","criteres"],["Candidature","candidature"],["Documents","documents"],["Entretien","entretien"],["Préparation","preparation"],["Coût","cout"],["Campus","campus"],["Débouchés","debouches"],["Comparaison","comparaison"],["FAQ","faq"]];
+const jsonLd = [
+  { "@context": "https://schema.org", "@type": "Article", headline: title, description, author: { "@type": "Organization", name: site.name }, publisher: { "@type": "Organization", name: site.name }, dateModified: "2026-05-05", mainEntityOfPage: `${site.url}/x-hec-entrepreneurs` },
+  { "@context": "https://schema.org", "@type": "Course", name: "Master of Science X-HEC Entrepreneurs", description: "Programme d'entrepreneuriat porté par HEC Paris et l'École Polytechnique.", provider: [{ "@type": "CollegeOrUniversity", name: "HEC Paris", sameAs: "https://www.hec.edu/" }, { "@type": "CollegeOrUniversity", name: "École Polytechnique", sameAs: "https://www.polytechnique.edu/" }] },
+  { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Accueil", item: site.url }, { "@type": "ListItem", position: 2, name: "X-HEC Entrepreneurs", item: `${site.url}/x-hec-entrepreneurs` }] },
+  { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })) }
+];
+---
+
+<BaseLayout title={title} description={description} path="/x-hec-entrepreneurs" type="article" jsonLd={jsonLd}>
+  <main>
+    <section class="bg-mist">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 lg:grid-cols-[1fr_360px] lg:py-20">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.18em] text-gold">Guide admission 2026</p>
+          <h1 class="mt-5 font-serif text-5xl font-bold leading-[1.02] text-navy md:text-7xl">X-HEC Entrepreneurs: le guide français pour préparer l'admission.</h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-ink/72">Une page longue, structurée et évolutive pour comprendre le programme, construire un dossier crédible, préparer l'entretien et décider si X-HEC Entrepreneurs correspond à votre projet.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a class="bg-navy px-6 py-4 text-center text-sm font-bold text-white hover:bg-navy/90" href="/calculateur-admission">Calculer mes chances</a><a class="border border-navy/20 px-6 py-4 text-center text-sm font-bold text-navy hover:border-gold" href="/reservation">Réserver 20 minutes</a></div>
+        </div>
+        <aside class="border border-navy/10 bg-white p-6 shadow-soft"><p class="font-semibold text-navy">Repères officiels HEC 2025</p><dl class="mt-5 grid gap-4"><div><dt class="text-3xl font-bold text-navy">75%</dt><dd class="text-sm text-ink/65">des diplômés lancent leur entreprise</dd></div><div><dt class="text-3xl font-bold text-navy">97%</dt><dd class="text-sm text-ink/65">employés sous 7 mois</dd></div><div><dt class="text-3xl font-bold text-navy">67K€</dt><dd class="text-sm text-ink/65">salaire moyen de départ</dd></div></dl><p class="mt-5 text-xs leading-5 text-ink/55">Source: page officielle HEC consultée le 5 mai 2026. À vérifier avant publication finale.</p></aside>
+      </div>
+    </section>
+
+    <div class="mx-auto grid max-w-7xl gap-10 px-5 py-12 lg:grid-cols-[260px_1fr]">
+      <aside class="hidden lg:block"><nav class="sticky top-28 grid gap-2 border-l border-navy/10 pl-4 text-sm text-navy/75" aria-label="Sommaire X-HEC Entrepreneurs">{toc.map(([item, anchor]) => <a href={`#${anchor}`}>{item}</a>)}</nav></aside>
+      <article class="content max-w-4xl">
+        <h2 id="programme">Présentation du programme</h2><p>X-HEC Entrepreneurs associe la culture business d'HEC Paris, l'écosystème scientifique de l'École Polytechnique et une pédagogie orientée terrain. La candidature doit montrer une ambition, des preuves d'exécution et une vraie capacité à apprendre dans l'incertitude.</p><InlineCTA />
+        <h2 id="profil-des-admis">Profil des admis</h2><p>Les profils forts combinent base académique solide, capacité d'exécution, maturité entrepreneuriale et cohérence de parcours. Un ingénieur devra traduire sa profondeur technique en potentiel marché; un profil business devra prouver sa capacité à construire et vendre.</p><InlineCTA title="Votre profil est-il lisible pour un jury X-HEC ?" copy="Le calculateur identifie les zones à renforcer avant de rédiger la lettre et de préparer l'entretien." />
+        <h2 id="criteres">Critères d'admission</h2><p>Le jury évalue le niveau académique, la motivation, le potentiel entrepreneurial, l'adéquation avec le programme et la contribution à la promotion. Une candidature forte transforme chaque élément du dossier en preuve concrète.</p>
+        <h2 id="candidature">Processus de candidature</h2><p>La candidature passe par la plateforme officielle HEC. Les rounds et dates limites peuvent évoluer; la page officielle affichait notamment un Round 5 au 28 mai 2026 lors de la préparation du scaffold. Vérifiez toujours la date exacte avant soumission.</p><InlineCTA />
+        <h2 id="documents">Documents requis</h2><p>Le socle attendu inclut généralement CV, transcripts, diplômes, lettre de motivation, scores éventuels et recommandations. Le CV doit être une page de preuves: impact mesurable, initiatives, responsabilités, traction et résultats.</p>
+        <h2 id="entretien">L'entretien</h2><p>L'entretien teste la cohérence du récit: pourquoi X-HEC maintenant, quelle preuve montre votre capacité entrepreneuriale, quel marché comprenez-vous, quelle faiblesse assumez-vous et que ferez-vous dans les 90 premiers jours.</p>
+        <h2 id="preparation">Préparation à l'entretien</h2><p>Préparez un pitch de 90 secondes, une banque d'exemples comportementaux et une défense structurée du projet. Les erreurs fréquentes sont l'abstraction, la survente, l'oubli des faiblesses et l'absence de preuves.</p><InlineCTA title="Simuler l'entretien avant de figer votre dossier" copy="Un entretien blanc révèle souvent les incohérences que la lettre masque encore." />
+        <h2 id="cout">Coût et financement</h2><p>Les frais, bourses, prêts et dispositifs de financement doivent être vérifiés sur les pages officielles HEC. Cette section servira de base pour une page dédiée au budget, aux bourses HEC et au retour sur investissement.</p>
+        <h2 id="campus">Vie sur le campus</h2><p>Le programme s'inscrit dans l'écosystème HEC Paris à Jouy-en-Josas et dans la proximité avec Polytechnique. Campus, associations, alumni, incubateurs et projets collectifs comptent dans l'expérience.</p>
+        <h2 id="debouches">Débouchés</h2><p>HEC met en avant 75% de diplômés qui lancent leur entreprise, 97% employés sous 7 mois et 67K€ de salaire moyen de départ dans son enquête 2025. Ces chiffres illustrent la force de l'écosystème sans garantir un résultat individuel.</p>
+        <h2 id="comparaison">Comparaison avec HEC MIM, ESSEC, ESCP et INSEAD</h2><p>X-HEC n'est pas le meilleur choix pour tous les candidats. HEC MIM peut être plus généraliste; ESSEC, ESCP et INSEAD répondent à d'autres moments de carrière, réseaux et budgets. Le bon choix dépend de la maturité du projet.</p><InlineCTA title="Choisir le bon programme avant de candidater" copy="Un diagnostic évite de construire une candidature brillante pour une cible mal alignée." />
+        <h2 id="faq">FAQ X-HEC Entrepreneurs</h2>{faq.map(([question, answer]) => <section><h3>{question}</h3><p>{answer}</p></section>)}
+        <div class="mt-12 grid gap-3 border-t border-navy/10 pt-8 sm:grid-cols-2">{programLinksFr.map((item) => <a class="border border-navy/10 px-4 py-3 text-sm font-semibold text-navy hover:border-gold" href={item.href}>{item.label}</a>)}</div>
+      </article>
+    </div>
+  </main>
+</BaseLayout>
