@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "Merci | Dream School";
+const description = "Votre demande a bien été reçue. Voici les prochaines étapes Dream School.";
+---
+<BaseLayout title={title} description={description} path="/merci" noSticky>
+  <main class="mx-auto max-w-3xl px-5 py-16">
+    <h1 class="font-serif text-5xl font-bold text-navy">Merci, votre demande est bien reçue.</h1>
+    <p class="mt-5 text-lg leading-8 text-ink/72">Le lien du guide et l'email de bienvenue seront envoyés ici dès que Brevo sera connecté. Vous pouvez déjà réserver un appel de diagnostic.</p>
+    <a class="mt-8 inline-block bg-navy px-6 py-4 text-sm font-bold text-white" href="/reservation">Réserver 20 minutes</a>
+  </main>
+</BaseLayout>
